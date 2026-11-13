@@ -12,81 +12,77 @@ An end-to-end Data Engineering project that processes synthetic hotel booking da
 
 ## 🎯 Project Overview
 
-This project demonstrates a simple end-to-end data engineering workflow, from raw data extraction to interactive data visualization.
+This project demonstrates an end-to-end Data Engineering workflow, starting from raw data ingestion and transformation to database storage and interactive data visualization.
 
-The pipeline processes hotel booking records, performs data cleaning and transformation, and loads the resulting dataset into a PostgreSQL database for analytical purposes.
+The pipeline processes hotel booking records, performs data cleaning and transformation using Python and Pandas, and loads the resulting dataset into PostgreSQL for analytical purposes.
 
 ### Project Objectives
 
 - Build a structured ETL pipeline using Python.
-- Clean and transform raw hotel booking data.
+- Extract, clean, and transform raw hotel booking data.
 - Store processed data in PostgreSQL.
-- Create an interactive dashboard for business analysis.
+- Build an interactive dashboard for business analysis.
 - Practice essential Data Engineering tools and workflows.
 
-## 🏗️ Architecture
+## 🏗️ System Architecture
 
-```text
-Raw CSV Dataset
-      │
-      ▼
-   EXTRACT
-      │
-      ▼
-  TRANSFORM
-  - Remove duplicates
-  - Handle missing values
-  - Create calculated columns
-      │
-      ▼
-     LOAD
-      │
-      ▼
-  PostgreSQL
-      │
-      ▼
- Streamlit Dashboard
-      │
-      ▼
- Business Insights
-```
+The following diagram illustrates the complete data workflow and the technologies used in this project.
+
+![Hotel Booking Data Engineering Architecture](images/architecture.png)
+
+### Architecture Workflow
+
+1. **Source Data:** Raw hotel booking dataset in CSV format.
+2. **Ingest & Transform:** Python and Pandas handle data extraction, cleaning, and transformation.
+3. **Storage:** PostgreSQL 16 stores the processed booking data, running in a Docker container.
+4. **Data Access:** SQLAlchemy and Psycopg provide database connectivity.
+5. **Visualization:** Streamlit and Plotly create interactive dashboards.
+6. **Output:** Business insights through booking trends, cancellation analysis, revenue, and other key metrics.
 
 ## 🛠️ Tech Stack
 
 | Technology | Purpose |
 |---|---|
 | Python | Main programming language |
-| Pandas | Data cleaning and transformation |
-| SQLAlchemy | Database connection |
-| PostgreSQL 16 | Data storage |
-| Docker | PostgreSQL containerization |
-| Streamlit | Interactive dashboard |
+| Pandas | Data processing and transformation |
+| SQLAlchemy | Database connection and SQL toolkit |
+| Psycopg | PostgreSQL database driver |
+| PostgreSQL 16 | Relational database storage |
+| Docker | Database containerization |
+| Docker Compose | Container configuration and management |
+| Streamlit | Interactive dashboard development |
 | Plotly | Data visualization |
-| Git & GitHub | Version control |
+| Git & GitHub | Version control and source code hosting |
+| Visual Studio Code | Development environment |
 
 ## ⚙️ ETL Pipeline
 
-**1. Extract**
+### 1. Extract
 
-Reads the raw hotel booking dataset from a CSV file.
+Reads the raw hotel booking dataset from a CSV file using Python and Pandas.
 
-**2. Transform**
+### 2. Transform
 
-- Removes duplicate records.
-- Handles missing values.
-- Creates `total_nights` and `total_guests`.
-- Calculates `estimated_revenue`.
-- Sets estimated revenue to zero for canceled bookings.
-- Filters invalid records.
+The transformation process includes:
 
-**3. Load**
+- Removing duplicate records.
+- Handling missing values.
+- Creating `total_nights` and `total_guests` columns.
+- Calculating `estimated_revenue`.
+- Setting estimated revenue to zero for canceled bookings.
+- Filtering invalid records.
 
-Loads the cleaned dataset into the PostgreSQL table named `hotel_bookings`.
+### 3. Load
 
-**Processing Result**
+Loads the cleaned dataset into the PostgreSQL table named `hotel_bookings` using SQLAlchemy and Psycopg.
 
-- Raw records: 10,000
-- Processed records: 9,691
+### Processing Results
+
+| Description | Records |
+|---|---:|
+| Raw Dataset | 10,000 |
+| Processed Dataset | 9,691 |
+| Removed Records | 309 |
 
 ## 📈 Dashboard Features
 
@@ -137,7 +133,8 @@ Hotel-Booking-Data-Engineering/
 │   └── app.py
 │
 ├── images/
-│   └── dashboard.png
+│   ├── dashboard.png
+│   └── architecture.png
 │
 ├── docker-compose.yml
 ├── requirements.txt
@@ -216,11 +213,11 @@ The dashboard will open in your browser.
 
 This project uses a synthetic hotel booking dataset containing 10,000 initial records and 32 columns.
 
-The dataset is intended for learning and demonstrating data engineering workflows. It is not presented as an official hotel booking dataset.
+The dataset is intended for learning and demonstrating Data Engineering workflows. It is not presented as an official hotel booking dataset.
 
 ## 👨‍💻 Author
 
-**Roni Ramdani**
+Roni Ramdani
 
 - GitHub: [@ronidee369](https://github.com/ronidee369)
 - Project Repository: [Hotel Booking Data Engineering Pipeline](https://github.com/ronidee369/hotel-booking-data-engineering)
