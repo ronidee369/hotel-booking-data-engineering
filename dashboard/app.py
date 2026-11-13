@@ -279,34 +279,47 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
+
 # =====================================================
-# 4. DATABASE CONNECTION
+# 4. DATA SOURCE
 # =====================================================
 
-# Load environment variables dari file .env
+# Load environment variables dari file .env jika tersedia
 project_dir = Path(__file__).resolve().parent.parent
 env_path = project_dir / ".env"
 load_dotenv(env_path)
 
-# Mengambil koneksi database dari .env
 DATABASE_URL = os.getenv("DATABASE_URL")
+CSV_PATH = project_dir / "data" / "processed" / "hotel_bookings_clean.csv"
 
-if not DATABASE_URL:
-    raise ValueError("DATABASE_URL tidak ditemukan di file .env")
 
 @st.cache_data
 def load_data():
-    engine = create_engine(DATABASE_URL)
+    # Mode lokal: gunakan PostgreSQL
+    if DATABASE_URL:
+        engine = create_engine(DATABASE_URL)
 
-    try:
-        df = pd.read_sql(
-            "SELECT * FROM hotel_bookings",
-            engine
-        )
-    finally:
-        engine.dispose()
+        try:
+            df = pd.read_sql(
+                "SELECT * FROM hotel_bookings",
+                engine
+            )
+        finally:
+            engine.dispose()
 
-    return df
+        return df
+
+    # Mode publik: gunakan CSV dari repository
+    if CSV_PATH.exists():
+        return pd.read_csv(CSV_PATH)
+
+    raise FileNotFoundError(
+        f"Dataset tidak ditemukan: {CSV_PATH}"
+    )
+
+
+DATA_SOURCE = "DATABASE CONNECTED" if DATABASE_URL else "CSV DATA SOURCE"
+
 
 
 # =====================================================
@@ -435,12 +448,12 @@ try:
     with head_col:
         st.markdown("""
 <div class="top-header">
-<div class="top-title-row">
-<span class="top-emoji">🏨</span>
-<span class="top-title">Hotel Booking Analytics</span>
-<span class="status-pill"><span class="status-dot"></span>DATABASE CONNECTED</span>
-</div>
-<div class="top-sub">Hotel performance, customer behavior &amp; booking insights</div>
+    <div class="top-title-row">
+        <span class="top-emoji">🏨</span>
+        <span class="top-title">Hotel Booking Analytics</span>
+        <span class="status-pill"><span class="status-dot"></span>{DATA_SOURCE}</span>
+    </div>
+    <div class="top-sub">Hotel performance, customer behavior &amp; booking insights</div>
 </div>
 """, unsafe_allow_html=True)
 
