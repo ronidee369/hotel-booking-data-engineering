@@ -4,11 +4,7 @@ An end-to-end Data Engineering project that processes synthetic hotel booking da
 
 ## 📊 Dashboard Preview
 
-[![Hotel Booking Dashboard](images/dashboard.png)](YOUR_STREAMLIT_APP_URL)
-
-*Click the dashboard preview to explore the interactive version.*
-
-> Replace `YOUR_STREAMLIT_APP_URL` with your published Streamlit app URL once deployment is ready.
+[![Hotel Booking Dashboard](images/dashboard.png)](https://hotel-booking-data-engineering-dashboard.streamlit.app/)
 
 ## 🎯 Project Overview
 
