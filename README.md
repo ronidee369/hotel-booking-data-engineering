@@ -28,7 +28,7 @@ The pipeline processes hotel booking records, performs data cleaning and transfo
 
 The following diagram illustrates the complete data workflow and the technologies used in this project.
 
-![Hotel Booking Data Engineering Architecture](images/architecture.png)
+![Hotel Booking Data Engineering Architecture](images/arsitektur.png)
 
 ### Architecture Workflow
 
